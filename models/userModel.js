@@ -34,5 +34,23 @@ async function find(name) {
   }
 }
 
+async function insert(users) {
+  try {
+    //await client.connect();
 
-module.exports = {find};
+    //const database = client.db("app_zero_db");
+    const database = mongo.getDb();
+    const collection = database.collection("users");
+   
+    const options = {ordered: true, }
+    const result = await collection.insertMany(users);
+
+    console.log(
+        `${result.insertedCount} documents were inserted`
+    );
+  } catch(e) {
+      console.log("Catch an error: ", e)
+  }
+}
+
+module.exports = {find,insert};
