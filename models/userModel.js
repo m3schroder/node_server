@@ -43,7 +43,7 @@ async function insert(users) {
     const collection = database.collection("users");
    
     const options = {ordered: true, }
-    const result = await collection.insertMany(users);
+    const result = await collection.insertMany(users, options);
 
     console.log(
         `${result.insertedCount} documents were inserted`

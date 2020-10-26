@@ -10,9 +10,9 @@ router.get('/', wrap(async (req,res)=> {
 }));
 
 //Find by name
-router.get('/:name', wrap(async (req,res)=> {
-        let users = await User.find(req.params.name);
-        res.send(JSON.stringify(users));
+router.get('/:username', wrap(async (req,res)=> {
+        let user = await User.find(req.params.username);
+        res.send(JSON.stringify(user));
 }));
 
 router.post('/', wrap(async (req,res)=> {
