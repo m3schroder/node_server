@@ -1,13 +1,19 @@
-const client = require('../config/mongo');
+const mongo = require('../config/mongoUtil');
 
-async function findAll() {
+async function find(name) {
   try {
-    await client.connect();
+    //await client.connect();
 
-    const database = client.db("app_zero_db");
+    //const database = client.db("app_zero_db");
+    const database = mongo.getDb();
     const collection = database.collection("users");
+    let query;
 
-    const query = { name: "Matt" };
+    if (name == null) {
+       query = {}; 
+    } else {
+       query = {"name": name } 
+    } 
 
     const options = {
       // sort matched documents in descending order by rating
@@ -25,9 +31,8 @@ async function findAll() {
     return users;
   } catch(e) {
       console.log("Catch an error: ", e)
-  }finally {
-    await client.close();
   }
 }
 
-module.exports = {findAll};
+
+module.exports = {find};
