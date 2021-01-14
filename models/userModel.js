@@ -1,56 +1,48 @@
-const mongo = require('../config/mongoUtil');
+const mongo = require("../config/mongoUtil");
 
-async function find(name) {
+async function getUserByEmail(email) {
   try {
-    //await client.connect();
-
-    //const database = client.db("app_zero_db");
     const database = mongo.getDb();
     const collection = database.collection("users");
-    let query;
-
-    if (name == null) {
-       query = {}; 
-    } else {
-       query = {"name": name } 
-    } 
-
+    const query = { email: email };
     const options = {
-      // sort matched documents in descending order by rating
       sort: { password: -1 },
       projection: { _id: 0, name: 1, email: 1, password: 1 },
     };
-
-    const Cursor = await collection.find(query, options);
-
-    if ((await Cursor.count()) === 0) {
-      console.log("No documents found!");
-    }
-
-    let users = await Cursor.toArray();
-    return users;
-  } catch(e) {
-      console.log("Catch an error: ", e)
+    const user = await collection.findOne(query);
+    if (user) return user;
+  } catch (e) {
+    console.log("Catch an error: ", e);
   }
 }
 
-async function insert(users) {
+async function getUserById(id) {
   try {
-    //await client.connect();
-
-    //const database = client.db("app_zero_db");
     const database = mongo.getDb();
     const collection = database.collection("users");
-   
-    const options = {ordered: true, }
-    const result = await collection.insertMany(users, options);
-
-    console.log(
-        `${result.insertedCount} documents were inserted`
-    );
-  } catch(e) {
-      console.log("Catch an error: ", e)
+    const query = { _id: id };
+    const options = {
+      sort: { password: -1 },
+      projection: { _id: 0, name: 1, email: 1, password: 1 },
+    };
+    const user = await collection.findOne(query);
+    return user;
+  } catch (e) {
+    console.log("Catch an error: ", e);
   }
 }
 
-module.exports = {find,insert};
+async function registerUser(user) {
+  try {
+    const database = mongo.getDb();
+    const collection = database.collection("users");
+    const options = { ordered: true };
+    const result = await collection.insertOne(user);
+
+    console.log(`${result.insertedCount} document inserted`);
+  } catch (e) {
+    console.log("Catch an error: ", e);
+  }
+}
+
+module.exports = { getUserByEmail, registerUser, getUserById };

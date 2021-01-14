@@ -1,27 +1,48 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const User = require('../models/userModel');
-const wrap = require('../middleware/wrap');
-
-//Find all
-router.get('/', wrap(async (req,res)=> {
-        let users = await User.find();
-        res.send(JSON.stringify(users));
-}));
+const User = require("../models/userModel");
+const wrap = require("../middleware/wrap");
+const passport = require("passport");
+const bcrypt = require("bcrypt");
 
 //Find by name
-router.get('/:username', wrap(async (req,res)=> {
-        let user = await User.find(req.params.username);
-        res.send(JSON.stringify(user));
-}));
+router.get(
+  "/",
+  wrap(async (req, res) => {
+    let user = await User.getUserByEmail(req.body.email);
+    console.log(user);
+    if (user) res.send(JSON.stringify(user));
+    else res.send("No user with that email");
+  })
+);
 
-router.post('/', wrap(async (req,res)=> {
-    let users = await User.insert(req.body);
-   if(users != "undefined")
-        res.send("Succesfully inserted user(s)")
-    else
-        res.send("Insert failed")
-    res.send();
-}));
+router.post(
+  "/register",
+  wrap(async (req, res) => {
+    try {
+      let { name, username, email, password } = req.body;
+      let user = await {
+        name: name,
+        username: username,
+        email: email,
+        hashedPassword: bcrypt.hash(password, 10),
+      };
+      let result = await User.registerUser(user);
+      console.log(user);
+      res.send("Success");
+    } catch (e) {
+      console.log("Fail: ", e);
+      res.send();
+    }
+  })
+);
+
+router.post(
+  "/login",
+  passport.authenticate("local", { session: false }),
+  (req, res) => {
+    res.json(req.user);
+  }
+);
 
 module.exports = router;
