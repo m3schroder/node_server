@@ -1,10 +1,11 @@
-var con = require('./config/db.js');
+var express = require('express');
+var app = express();
+
 require('dotenv').config();
 
-console.log(process.env.DB_HOST);
-var sql = "INSERT INTO user (username, email, password) VALUES ('mataroni', 'm3schroder', 'guessthisisit')";
-con.query( sql, function (error, results, fields) {
-  if (error) throw error;
-  console.log("Connected!");
-  // connected!
-});
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use('/users', require('./routes/user.js'));
+
+app.listen(process.env.PORT);
+
