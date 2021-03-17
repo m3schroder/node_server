@@ -1,12 +1,8 @@
-var mysql = require('mysql');
+var con = require('./config/db.js');
 
-var con = mysql.createConnection({
-  host: "45.79.253.178",
-  user: "root",
-  password: "Sma||ishba11z"
-});
-
-con.connect(function(err) {
-  if (err) throw err;
+var sql = "INSERT INTO user (username, email, password) VALUES ('mataroni', 'm3schroder', 'guessthisisit')";
+con.query( sql, function (error, results, fields) {
+  if (error) throw error;
   console.log("Connected!");
+  // connected!
 });
