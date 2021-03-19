@@ -1,9 +1,9 @@
 const con = require('../config/db.js');
 
-const postUser = (user, email, password,callback) => {
+const postUser = (username, email, password,callback) => {
 try {
 	var sql = "INSERT INTO user (username, email, password) VALUES (?, ? , ?)";
-	con.query( sql, [user, email, password], function (e, results, fields) {
+	con.query( sql, [username, email, password], function (e, results, fields) {
 		if (e) throw e
 		return callback(results)
 	});
