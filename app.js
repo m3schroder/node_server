@@ -7,5 +7,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use('/users', require('./routes/user.js'));
 
-app.listen(process.env.PORT);
+const server = app.listen(process.env.PORT || 3000, () => {
+      console.log("Server is running")
+});
 
