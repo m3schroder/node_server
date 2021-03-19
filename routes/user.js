@@ -1,16 +1,19 @@
 const express = require('express')
 const router = express.Router()
-const userModel = require("../models/user.model")
+const userModel = require("../models/user_model")
 
 router.get('/', function (req, res) {
-	userModel.getUsers(req, res)
+	userModel.getUsers(function(result){
+		res.json(result)
+	})
 })
 
 router.post('/', function (req, res) {
-	userModel.postUser(req.body.user, 
-					   req.body.email, 
-					   req.body.password)
-	res.send("User posted!")
+	let {user, email, password} = req.body
+	userModel.postUser(user, email, password, function(result){
+		console.log(result)
+		res.send("Its good I guess")
+	})
 })
 
 module.exports = router
