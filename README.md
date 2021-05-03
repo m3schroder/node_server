@@ -4,4 +4,4 @@
 <p>Here are a few key objectives for this API</p>
   <li>
   <ul>Basic CRUD operations with DB</ul>
-  
+  </li>
