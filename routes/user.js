@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const userModel = require("../models/user_model");
-const ash = require("express-async-handler");
+const wrap = require("../middleware/wrap");
 
 router.get(
   "/",
-  ash(async (req, res, next) => {
+  wrap(async (req, res, next) => {
     await userModel.getUsers(function (result) {
       res.json(result);
     });
@@ -14,7 +14,7 @@ router.get(
 
 router.post(
   "/",
-  ash(async (req, res, next) => {
+  wrap(async (req, res, next) => {
     let { username, email, password } = req.body;
     await userModel.postUser(username, email, password, function (result) {
       console.log(result);
