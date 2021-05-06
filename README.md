@@ -14,8 +14,8 @@
   
   
 ### Methods
-<p>My previous attempts at a node based API have stopped short of protecting the end points. This attempt will be both comprehensive <br>
+My previous attempts at a node based API have stopped short of protecting the end points. This attempt will be both comprehensive <br>
 and careful. I'll work on MVPs for each of the objectives in the order they are listed and then loop back to improve on each objective <br>
 afterwards. I will start by creating basic CRUD operations for a single users table, then protecting the routes used in those operations <br> 
 and keep with that pattern for each of the other objectives. Once I'm through with the first iteration I will go back to build out, <br>
-optimize, and refactor. </p>
+optimize, and refactor.
