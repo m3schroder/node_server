@@ -1,12 +1,16 @@
-const con = require("../config/db.js");
+const connection = require("../config/db.js");
 
 const postUser = (username, email, password, callback) => {
   try {
     var sql = "INSERT INTO user (username, email, password) VALUES (?, ? , ?)";
-    con.query(sql, [username, email, password], function (e, results, fields) {
-      if (e) throw e;
-      return callback(results);
-    });
+    connection.query(
+      sql,
+      [username, email, password],
+      function (e, results, fields) {
+        if (e) throw e;
+        return callback(results);
+      }
+    );
   } catch (e) {
     console.log("There was an error posting new user: " + e);
   }
@@ -15,7 +19,7 @@ const postUser = (username, email, password, callback) => {
 const getUsers = (callback) => {
   try {
     var sql = "SELECT * FROM app_db.user";
-    con.query(sql, function (e, results, fields) {
+    connection.query(sql, function (e, results, fields) {
       if (e) throw e;
       return callback(results);
     });
