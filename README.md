@@ -3,7 +3,7 @@
 ### Intro
 <p>This node application serves as a program interface for a linode hosted MYSQL server.</p>
 
-  ## Key objectives
+  <h2> Key objectives </h2>
   <ul>
     <li>Basic CRUD operations</li>
     <li>User authentication</li>
@@ -11,7 +11,7 @@
     <li>Protect endpoints</li> 
   </ul>
   
-  ## Additional goals
+  <h2> Additional goals </h2>
   <ul>
   <li> Create secure payment system </li>
   <ul>
