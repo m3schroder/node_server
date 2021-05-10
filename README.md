@@ -8,7 +8,7 @@
     <li>Basic CRUD operations</li>
     <li>User authentication</li>
     <li>Caching / sessions</li>
-    <li>Protected endpoints</li>
+    <li>Protect endpoints</li>
   </ul>
   
   
