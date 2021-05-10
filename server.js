@@ -10,10 +10,16 @@ app.use(
     secret: "Keep it secret",
     name: "uniqueSessionID",
     saveUninitialized: false,
+    resave: false,
   })
 );
-app.use("/users", require("./routes/user.js"));
+app.use("/", require("./routes/home.js"));
+app.use(
+  "/user",
+  require("./middleware/authenticate"),
+  require("./routes/user.js")
+);
 
 app.listen(process.env.PORT, () => {
-  console.log(`Example app listening at http://localhost:${process.env.PORT}`);
+  console.log(`Server listening at http://localhost:${process.env.PORT}`);
 });
