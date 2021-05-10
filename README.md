@@ -3,7 +3,7 @@
 ### Intro
 <p>This application serves as a program interface for a hosted MYSQL server.</p>
 
-  <h2> Key objectives </h2>
+### Key objectives 
   <ul>
     <li>Basic CRUD operations</li>
     <li>User authentication</li>
@@ -11,7 +11,7 @@
     <li>Protect endpoints</li> 
   </ul>
   
-  <h2> Additional goals </h2>
+### Additional goals
   <ul>
   <li> Create secure payment system </li>
   </ul>
