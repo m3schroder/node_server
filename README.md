@@ -1,6 +1,6 @@
 ## Node Server
 
-#### Intro
+### Intro
 <p>This application serves as a program interface for a hosted MYSQL server.</p>
 
   <h2> Key objectives </h2>
