@@ -3,13 +3,18 @@
 ### Intro
 <p>This node application serves as a program interface for a linode hosted MYSQL server.</p>
 
-<p>Here are a few key objectives for this API</p>
+  ## Key objectives
   <ul>
     <li>Basic CRUD operations</li>
     <li>User authentication</li>
     <li>Caching / sessions</li>
-    <li>Protect endpoints</li>
+    <li>Protect endpoints</li> 
   </ul>
+  
+  ## Additional goals
+  <ul>
+  <li> Create secure payment system </li>
+  <ul>
   
   
 ### Methods
