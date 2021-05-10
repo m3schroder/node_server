@@ -14,7 +14,7 @@
   <h2> Additional goals </h2>
   <ul>
   <li> Create secure payment system </li>
-  <ul>
+  </ul>
   
   
 ### Methods
