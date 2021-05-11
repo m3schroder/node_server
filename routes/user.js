@@ -9,15 +9,15 @@ router.post(
   "/delete",
   wrap(async (req, res, next) => {
     //Change these to pull from the session variables later
-    let { username, password } = req.body;
-    await userModel.findUser(username, async function (result) {
+    let { password } = req.body;
+    await userModel.findUser(req.session.username, async function (result) {
       if (result.length == 1) {
         const comparison = bycrypt.compare(
           password,
           String(result[0].password)
         );
         if (comparison) {
-          await userModel.deleteUser(username, function (result) {
+          await userModel.deleteUser(req.session.username, function (result) {
             console.log(result);
           });
           next();
@@ -51,28 +51,32 @@ router.post(
   "/update",
   wrap(async (req, res, next) => {
     //Change these to pull from the session variables later
-    let { username, email } = req.body;
-    await userModel.updateUser(username, email, async function (result) {
-      console.log(result);
-      if (result.changedRows > 0) {
-        res.send({
-          code: 200,
-          success: "User updated",
-        });
-      } else {
-        if (result.affectedRows == 1) {
+    let { email } = req.body;
+    await userModel.updateUser(
+      req.session.username,
+      email,
+      async function (result) {
+        console.log(result);
+        if (result.changedRows > 0) {
           res.send({
-            code: 204,
-            error: "No update",
+            code: 200,
+            success: "User updated",
           });
         } else {
-          res.send({
-            code: 204,
-            error: "No effect",
-          });
+          if (result.affectedRows == 1) {
+            res.send({
+              code: 204,
+              error: "No update",
+            });
+          } else {
+            res.send({
+              code: 204,
+              error: "No effect",
+            });
+          }
         }
       }
-    });
+    );
   })
 );
 

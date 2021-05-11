@@ -10,8 +10,13 @@ router.post(
   wrap(async (req, res, next) => {
     let { username, email, password } = req.body;
     const encrypted = await bycrypt.hash(password, 10);
-    await userModel.postUser(username, email, encrypted, function (result) {
-      res.send({ code: 200, success: "user registered successfully" });
+    await userModel.postUser(username, email, encrypted, function (e, result) {
+      if (e.errno == 1062) {
+        console.log(e);
+        res.send({ code: 204, error: "username or email already in use" });
+      } else {
+        res.send({ code: 200, success: "user registered successfully" });
+      }
     });
   })
 );
@@ -52,6 +57,15 @@ router.post(
       success: "login successful",
     });
   }
+);
+
+router.get(
+  "/show",
+  wrap(async (req, res, next) => {
+    await userModel.getUsers(function (result) {
+      res.send(result);
+    });
+  })
 );
 
 module.exports = router;

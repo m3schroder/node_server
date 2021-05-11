@@ -1,5 +1,6 @@
 const connection = require("../config/db.js");
 
+//Posts new user
 const postUser = (username, email, password, callback) => {
   try {
     var sql = "INSERT INTO user (username, email, password) VALUES (?, ? , ?)";
@@ -18,7 +19,7 @@ const postUser = (username, email, password, callback) => {
 
 const getUsers = (callback) => {
   try {
-    var sql = "SELECT * FROM app_db.user";
+    var sql = "SELECT username, email FROM app_db.user";
     connection.query(sql, function (e, results, fields) {
       if (e) throw e;
       return callback(results);
@@ -28,6 +29,7 @@ const getUsers = (callback) => {
   }
 };
 
+//Returns a single user
 const findUser = (username, callback) => {
   try {
     var sql = "SELECT * FROM app_db.user WHERE username = ?";
@@ -40,6 +42,7 @@ const findUser = (username, callback) => {
   }
 };
 
+//Deletes user from database using username
 const deleteUser = (username, callback) => {
   try {
     var sql = "DELETE FROM app_db.user WHERE username = ?";
@@ -52,6 +55,7 @@ const deleteUser = (username, callback) => {
   }
 };
 
+//Looks up user by username and passes list of params for update
 const updateUser = (username, email, callback) => {
   try {
     var sql = "UPDATE user SET email = ?  WHERE username = ?";
