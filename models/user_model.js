@@ -55,7 +55,7 @@ const deleteUser = (username, callback) => {
   }
 };
 
-//Looks up user by username and passes list of params for update
+//Looks up user by username and updates email
 const updateUser = (username, email, callback) => {
   try {
     var sql = "UPDATE user SET email = ?  WHERE username = ?";

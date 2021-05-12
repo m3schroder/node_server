@@ -1,6 +1,6 @@
-var express = require("express");
+const express = require("express");
 const session = require("express-session");
-var app = express();
+const app = express();
 require("dotenv").config();
 
 app.use(express.json());
@@ -13,6 +13,8 @@ app.use(
     resave: false,
   })
 );
+
+//Routes
 app.use("/", require("./routes/home.js"));
 app.use(
   "/user",
